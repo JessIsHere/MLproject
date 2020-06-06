@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macros %}
+{% block body %}
+
+
+{{ macros.navbar() }}
+
+<div class="container">
+    <div class="jumbotron shadow-lg p-3 mb-5 bg-light">
+      <h1 class="display-3">Machine Learning Models</h1>
+    </div>
+    <!-- Start of website -->
+        <div class="row">
+          <div class="col-12">  
+              <h2>Random Forest Regression</h2>
+          </div>
+        </div>
+            
+            <hr>
+            <div class="row">
+              <div class="col-6">
+              <div class="card">
+              <h2>An Optimized Random Forest Regression Model for Predicing County Health Ranking</h2>
+              <p>The healthcare rankings for all 254 counties in Texas from 2015-2020 were used to construct a Random Forest
+                regression model consisting of 500 randomized decision trees. The model was initially trained on all health
+                data metrics (>50 different metrics) to determine relative importances for model parameters. The top 10 model 
+                parameters were then used to construct an optimized regression model with almost equivalent performance to the 
+                use of all health data metrics. Below is a deployment of this optimized Random Forest Regression Model. To 
+                submit data from your county or to explore these parameters, enter the health data metrics into the fields
+                below as floating-point numbers to predict the ranking based on these parameters.  
+              </p>
+              </div>
+            </div>
+              <div class="col-6">
+              <h2>Enter Health Data Metrics</h2>
+              <form method=post enctype="multipart/form-data">
+                <label for="Premature_Age_Adjusted_Mortality_per_100K">Premature Mortality Rate per 100K:</label>
+                <input type="text" id="Mortality" name="Mortality"><br>
+                <label for="Percent_Ppl_Under65_w/o_Insurance">Without Insurance 65 and Under %:</label>
+                <input type="text" id="NoInsurance" name="NoInsurance"><br>
+                <label for="Percent_Children_Living_in_Poverty">Children Living in Poverty %:</label>
+                <input type="text" id="ChildPoverty" name="ChildPoverty"><br>
+                <label for="Percent_Adult_Smokers" name="Percent_Adult_Smokers">Adult Smokers %:</label>
+                <input for="text" id="AdultSmokers" name="AdultSmokers"><br>
+                <label for="Percent_American_Indian_or_Alaskan_Native">American Indian or Alaskan Native %:</label>
+                <input type="text" id="Demographics" name="Demographics"><br>
+                <label for="Graduation_Rate">Graduation Rate:</label>
+                <input type="text" id="Graduation" name="Graduation"><br>
+                <label for="Median_Household_Income">Median Household Income(MHI):</label>
+                <input type="text" id="MHI" name="MHI"><br>
+                <label for="Percent_Low_Birthweight_Births">Low Birthweight Birth %:</label>
+                <input type="text" id="LowBirthweight" name="LowBirthweight"><br>
+                <label for="Teen_Birth_Rate">Teen Birth Rate:</label>
+                <input type="text" id="TeenBirth" name="TeenBirth"><br>
+                <label for="Percent_Pop_w/o_Adequate_Access_to_Food">Population with Inadequate Food Access %:</label>
+                <input type="text" id="FoodAccess" name="FoodAccess"><br>
+                
+        
+                <input type=submit value=Submit> 
+              </form>
+              <h4>Predicted Ranking by Random Forest Model: {{ result }}</h4>
+            </div>
+            <hr>
+        <div class="row">
+          <div class="col-12">
+            <hr>
+            <div class="card">
+            <h2>KNN</h2>
+            <p>Our KNN model took the 10 factors identified from our Random Forest Regression analysis and applied them to the
+              delivery setting and location types based on Counties with Community Health Centers today to see if we could accurately
+              identify the best Community Health Center setting and type.   We found that when we initially applied a demographic heavy 
+              model, that identification was not there, but when we moved to utilize the 10 most impactful health factors, our scores
+              increased to 78-85% depending on which target we were trying to identify.
+            </p>
+          </div>
+        </div>
+          </div>
+        </div>
+        <hr>
+        <br>
+       <br>
+</div>
+       {{ macros.footer() }}
+{% endblock %}
